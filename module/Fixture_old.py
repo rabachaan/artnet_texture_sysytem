@@ -2,10 +2,10 @@ class Fixture:
 
     FIXTURE_TYPES = {"RGB", "DRGB", "RGBD"}
 
-    def __init__(self, fixture_id:int, fixture_type:str = None) -> None:
+    def __init__(self, fixture_id:int, fixture_type:str = 'RGB') -> None:
         self._fixture_id   = fixture_id
-        self.fixture_type = fixture_type
-        self.universe     = None
+        self._fixture_typefixture_type = fixture_type
+        self._universe     = None
         self.addressR     = None
         self.addressG     = None
         self.addressB     = None
@@ -30,13 +30,13 @@ class Fixture:
 
     @property
     def universe(self):
-        return self.universe
+        return self._universe
     
     @universe.setter
     def universe(self, universe):
-        self.universe = universe
+        self._universe = universe
 
-    def set_address(self, address:int):
+    def set_address_from_R(self, address:int):
 
         if self.fixture_type == 'RGB':
             if address + 2 > 512:
@@ -62,4 +62,19 @@ class Fixture:
         else:
             raise AttributeError('define fixture type properly')
     
-        return 
+        return
+    
+    def set_fixture_type_from_address(self):
+        if not self.addressR and self.addressG and self.addressB and self.addressA:
+            raise Exception('set address properly')
+        
+        if self.addressA == -1:
+            self.fixture_type = 'RGB'
+        elif self.addressR + 3 == self.addressA:
+            self.fixture_type = 'RGBD'
+        elif self.addressR - 1 == self.addressA:
+            self.fixture_type = 'DRGB'
+        else:
+            raise Exception('set address properly')
+        
+        return

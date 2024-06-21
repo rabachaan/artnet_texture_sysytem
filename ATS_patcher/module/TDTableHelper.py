@@ -37,7 +37,7 @@ class TDTableHelper:
 
         return ret_list
     
-    def getDictionary(self, keyType='Col', keyNum = 0) -> dict:
+    def getDictionary(self, keyType:str, keyNum) -> dict:
         
         ret_dict = {}
 
@@ -66,7 +66,6 @@ class TDTableHelper:
         for i in range (len(keyList)):
             ret_dict[keyList[i]] = vals[i]
 
-        #辞書の要素は絶対に配列になるよおお
         return ret_dict
             
     
@@ -137,7 +136,7 @@ class TDTableHelper:
 
 
     #privateな関数なのでアンスコ始まりfrom ChatGPT
-    def _is_2d_list(self, lst):
+    def _is_2d_list(lst):
         if not isinstance(lst, list):
             return False  # リストでない場合、2次元リストではない
         if not lst:
@@ -150,7 +149,7 @@ class TDTableHelper:
 
         return True  # 上記の条件をすべて満たす場合、2次元リストとみなす
     
-    def _get_2d_array_shape(self, arr):
+    def _get_2d_array_shape(arr):
         # 空のリストの場合、行数と列数は0
         if not arr:
             return [0, 0]
