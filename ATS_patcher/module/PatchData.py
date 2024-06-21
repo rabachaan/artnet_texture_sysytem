@@ -31,7 +31,7 @@ class Fixture:
             raise ValueError(f"INVALID type: {type}. Valid types are : {Fixture.FIXTURE_TYPES}")
         self._fixture_type = fixture_type
 
-    #Fixtureクラス内のartnetは0始まり固定。実際のユニバース
+
     @property
     def universe(self):
         return self._universe
@@ -91,7 +91,7 @@ class PatchData:
     def __init__(self, patch_name:str) -> None:
         self._patch_name: str = patch_name
         self._artnet_start: int = 0
-        self._universe_list: Optional[List[int]] = None #ユニバースリスト内は表示されているユニバース。
+        self._universe_list: Optional[List[int]] = None
         self.resolution: Optional[int] = None
         self.partition: Optional[int] = None
         self._patch_grid: Optional[List[List[int]]] = None
@@ -234,7 +234,6 @@ class PatchData:
         self.fixture_dict = f_dict
         return
     
-    #ユニバースリスト内は表示されているユニバース。
     def make_universe_list_from_fixture_dict(self):
         if not self.fixture_dict:
             raise Exception('fixture_dict is not defined')
