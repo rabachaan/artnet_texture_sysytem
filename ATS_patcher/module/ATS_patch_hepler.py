@@ -1,6 +1,9 @@
-import csv
+﻿import csv
 import TDTableHelper
 from PatchData import Fixture
+
+
+
 
 
 class ATS_patch_helper:
@@ -30,6 +33,7 @@ class ATS_patch_helper:
             reader = csv.DictReader(csvfile)
 
             for row in reader:
+                
                 key = row[key_column]
                 #キーがなければ処理しない。つまりobjectが空欄
                 if row[key_column] == '':
@@ -135,6 +139,6 @@ class ATS_patch_helper:
             gridy = int((1 - uv[1]) * self.partition) 
 
             #v[0] == FixtureID
-            p_grid[gridx][gridy] = v[0]
+            p_grid[gridy][gridx] = v[0]
 
         return p_grid

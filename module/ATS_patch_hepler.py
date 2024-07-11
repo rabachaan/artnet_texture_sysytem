@@ -133,6 +133,6 @@ class ATS_patch_helper:
             gridy = int((1 - uv[1]) * self.partition) 
 
             #v[0] == FixtureID
-            p_grid[gridx][gridy] = v[0]
+            p_grid[gridy][gridx] = v[0]
 
         return p_grid
