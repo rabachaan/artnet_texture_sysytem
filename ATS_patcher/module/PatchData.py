@@ -1,4 +1,4 @@
-import TDTableHelper
+﻿import TDTableHelper
 
 from typing import List, Optional, Any
 

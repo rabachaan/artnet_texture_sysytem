@@ -1,19 +1,22 @@
-import csv
+﻿import csv
 import TDTableHelper
 from PatchData import Fixture
 
 
+
+
+
 class ATS_patch_helper:
 
-    def __init__(self, csv_path, artnet_start, partiton) -> None:
+    def __init__(self, csv_path, artnet_start, partition) -> None:
 
         self.meshGroup_dat = None
         self.primitve_dat  = None
         self.vertex_dat    = None
         self.artnet_start  = artnet_start
-        self.partiton      = partiton
+        self.partition      = partition
 
-        mesh_fixture_dict = self._csv_to_dict(csv_path, 'Object', ['Address','FixtureType'])
+        mesh_fixture_dict = self._csv_to_dict(csv_path, 'Object', ['FixtureID','Address','FixtureType'])
         self.csv_dict = mesh_fixture_dict
         pass
 
@@ -30,7 +33,11 @@ class ATS_patch_helper:
             reader = csv.DictReader(csvfile)
 
             for row in reader:
+                
                 key = row[key_column]
+                #キーがなければ処理しない。つまりobjectが空欄
+                if row[key_column] == '':
+                    continue
                 #TDが'.'を'_'変えちゃうのでこうするしかない
                 key = key.replace('.', '_')
                 value_list = []
@@ -72,7 +79,7 @@ class ATS_patch_helper:
         
         u_list = []
 
-        for v in self.csv_dict.items():
+        for v in self.csv_dict.values():
             univ = int(float(v[1]))
             if not univ in u_list:
                 u_list.append(univ)
@@ -123,8 +130,7 @@ class ATS_patch_helper:
 
         #f_dict = self.make_fixture_dict()
 
-        p_grid = [['' for _ in range(self.partiton)] for _ in range(self.partiton)]
-
+        p_grid = [['' for _ in range(self.partition)] for _ in range(self.partition)]
         #
         for mesh_name, v in self.csv_dict.items():
             uv = meshUVDict[mesh_name]
