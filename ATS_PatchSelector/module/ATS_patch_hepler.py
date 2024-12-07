@@ -133,6 +133,12 @@ class ATS_patch_helper:
         p_grid = [['' for _ in range(self.partition)] for _ in range(self.partition)]
         #
         for mesh_name, v in self.csv_dict.items():
+
+            #meshUVDictにあるものだけを処理。
+            #メッシュのないオブジェクトとかは無視するよー
+            if not mesh_name in meshUVDict.keys():
+                continue
+            
             uv = meshUVDict[mesh_name]
             #int(UV(x or y) / (1 / partition))と同じ
             gridx = int(uv[0] * self.partition)
